@@ -14,10 +14,13 @@ pipeline {
         stage('Deploy') {
     steps {
         echo "Deploying WAR file to Tomcat server..."
-        dir('hello-world-maven/hello-world') {
-            sh 'scp -o StrictHostKeyChecking=no target/hello-world.war ec2-user@65.2.3.46:/opt/tomcat/webapps/'
+
+        sshagent(credentials: ['tomcat-ec2-key']) {
+            dir('hello-world-maven/hello-world') {
+                sh 'scp -o StrictHostKeyChecking=no target/hello-world.war ec2-user@65.2.3.46:/opt/tomcat/webapps/'
+            }
+            sh 'ssh -o StrictHostKeyChecking=no ec2-user@65.2.3.46 "sudo systemctl restart tomcat"'
         }
-        sh 'ssh ec2-user@65.2.3.46 sudo systemctl restart tomcat'
     }
 }
 
