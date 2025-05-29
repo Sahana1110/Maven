@@ -17,9 +17,9 @@ pipeline {
 
         sshagent(credentials: ['tomcat-ec2-key']) {
             dir('hello-world-maven/hello-world') {
-                sh 'scp -o StrictHostKeyChecking=no target/hello-world.war ec2-user@65.2.3.46:/opt/tomcat/webapps/'
+                sh 'scp -o StrictHostKeyChecking=no target/hello-world.war ec2-user@13.204.26.205:/opt/tomcat/webapps/'
             }
-            sh 'ssh -o StrictHostKeyChecking=no ec2-user@65.2.3.46 "sudo systemctl restart tomcat"'
+            sh 'ssh -o StrictHostKeyChecking=no ec2-user@13.204.26.205 "sudo systemctl restart tomcat"'
         }
     }
 }
@@ -33,7 +33,7 @@ pipeline {
 
                 // Curl test URL to confirm deployment success
                 sh '''
-                    curl --fail http://65.2.3.46:8080/hello-world/index.jsp
+                    curl --fail http://13.204.26.205:8080/hello-world/index.jsp
                 '''
             }
         }
@@ -48,7 +48,7 @@ Hello,
 
 Your 'hello-world' app has been successfully deployed on Tomcat 
 
-Access it here: http://65.2.3.46:8080/hello-world/index.jsp
+Access it here: http://13.204.26.205:8080/hello-world/index.jsp
 
 Regards,
 Jenkins
