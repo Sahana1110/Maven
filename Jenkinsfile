@@ -15,9 +15,9 @@ pipeline {
     steps {
         echo "Deploying WAR file to Tomcat server..."
         dir('hello-world-maven/hello-world') {
-            sh 'scp -o StrictHostKeyChecking=no target/hello-world.war ec2-user@65.2.3.46:/opt/tomcat/webapps/'
+            sh 'scp -o StrictHostKeyChecking=no target/hello-world.war ec2-user@172.31.0.144:/opt/tomcat/webapps/'
         }
-        sh 'ssh ec2-user@65.2.3.46 sudo systemctl restart tomcat'
+        sh 'ssh ec2-user@172.31.0.144 sudo systemctl restart tomcat'
     }
 }
 
