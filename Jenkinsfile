@@ -46,7 +46,7 @@ pipeline {
                  body: '''\
 Hello,
 
-Your 'hello-world' app has been successfully deployed on Tomcat (172.31.10.50).
+Your 'hello-world' app has been successfully deployed on Tomcat 
 
 Access it here: http://65.2.3.46:8080/hello-world/index.jsp
 
@@ -56,12 +56,12 @@ Jenkins
         }
 
         failure {
-            mail to: 'your-email@example.com',
+            mail to: 'sahanams031@gmail.com',
                  subject: 'FAILURE: hello-world deployment',
                  body: '''\
 Hello,
 
-Deployment or test failed for 'hello-world' on Tomcat (172.31.10.50).
+Deployment or test failed for 'hello-world' on Tomcat.
 
 Please check Jenkins logs.
 
