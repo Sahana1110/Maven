@@ -17,7 +17,7 @@ pipeline {
 
                 // SCP command with full path in Jenkins workspace
                 sh '''
-                    scp Maven/hello-world-maven/hello-world/target/hello-world.war ec2-user@65.2.3.46:/opt/tomcat/webapps/
+                    sh 'scp -o StrictHostKeyChecking=no target/hello-world.war ec2-user@65.2.3.46:/opt/tomcat/webapps/'
                 '''
 
                 // SSH command to restart Tomcat on remote server
