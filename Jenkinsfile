@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building Maven project..."
-                dir('Maven/hello-world-maven/hello-world') {
+                dir('hello-world-maven/hello-world') {
                     sh 'mvn clean package'
                 }
             }
