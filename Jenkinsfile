@@ -12,20 +12,14 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                echo "Deploying WAR file to Tomcat server..."
-
-                // SCP command with full path in Jenkins workspace
-                sh '''
-                    sh 'scp -o StrictHostKeyChecking=no target/hello-world.war ec2-user@65.2.3.46:/opt/tomcat/webapps/'
-                '''
-
-                // SSH command to restart Tomcat on remote server
-                sh '''
-                    ssh ec2-user@65.2.3.46 'sudo systemctl restart tomcat'
-                '''
-            }
+    steps {
+        echo "Deploying WAR file to Tomcat server..."
+        dir('hello-world-maven/hello-world') {
+            sh 'scp -o StrictHostKeyChecking=no target/hello-world.war ec2-user@65.2.3.46:/opt/tomcat/webapps/'
         }
+        sh 'ssh ec2-user@65.2.3.46 sudo systemctl restart tomcat'
+    }
+}
 
         stage('Test') {
             steps {
